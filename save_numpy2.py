@@ -12,6 +12,7 @@ import networkx as nx
 from tqdm import tqdm
 
 from utils import read_data, merge_features
+from config import UTILITY
 
 
 if __name__=="__main__":
@@ -28,12 +29,12 @@ if __name__=="__main__":
 
     tr_all = np.hstack((train[feats].values/31, onehot.fit_transform(train[["f13_x", "f13_y"]])))
 
-    np.save("train_base_feats.npy", tr_all)
+    np.save(str(Path(UTILITY) / "train_base_feats.npy"), tr_all)
 
     test = merge_features(test, users)
 
     te_all = np.hstack((test[feats].values/31, onehot.fit_transform(test[["f13_x", "f13_y"]])))
 
-    np.save("test_base_feats.npy", te_all)
+    np.save(str(Path(UTILITY) / "test_base_feats.npy"), te_all)
 
 

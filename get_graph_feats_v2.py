@@ -66,8 +66,8 @@ if __name__ == "__main__":
     cvlist = list(StratifiedKFold(10, shuffle=True, random_state=12345786).split(train, train.is_chat))
     train_chat = cross_val_predict(grf, train, cv=cvlist, method='transform')
     test_chat = grf.fit(train).transform(test)
-    np.save("train_gfeats_v8.npy", train_chat)
-    np.save("test_gfeats_v8.npy", test_chat)
+    np.save(str(Path(UTILITY) / "train_gfeats_v8.npy"), train_chat)
+    np.save(str(Path(UTILITY) / "test_gfeats_v8.npy"), test_chat)
     del train_chat, test_chat
     gc.collect()
 

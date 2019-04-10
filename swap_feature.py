@@ -13,6 +13,8 @@ from tqdm import tqdm
 from utils import read_data
 from sklearn.base import BaseEstimator, TransformerMixin
 
+from config import UTILITY
+
 
 class SwapChat(BaseEstimator, TransformerMixin):
     
@@ -36,5 +38,5 @@ if __name__=="__main__":
     x_train = cross_val_predict(sw, train, cv=cvlist, method="transform")
     x_test = sw.fit(train).transform(test)
     
-    np.save("train_swap.npy", x_train)
-    np.save("test_swap.npy", x_test)    
+    np.save(str(Path(UTILITY) / "train_swap.npy"), x_train)
+    np.save(str(Path(UTILITY) / "test_swap.npy"), x_test)    

@@ -1,15 +1,12 @@
 import pandas as pd
 import numpy as np
-
 from sklearn.model_selection import cross_val_predict, cross_val_score, StratifiedKFold, GroupKFold
 from sklearn.preprocessing import LabelEncoder, StandardScaler, QuantileTransformer, OneHotEncoder
 from sklearn.pipeline import make_pipeline
 from sklearn.metrics import roc_auc_score
 import lightgbm as lgb
-
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 from pathlib import Path
 from collections import Counter
 import networkit as nt
@@ -18,6 +15,7 @@ from tqdm import tqdm
 
 
 from utils import read_data
+from config import UTILITY, SUBMISSIONS
 
 
 if __name__=="__main__":
@@ -30,12 +28,12 @@ if __name__=="__main__":
     featsg4 = [f+"_4" for f in featsg]
     featsg5 = [f+"_5" for f in featsg]
     featsg6 = ["upath", "vpath"]
-    train_contact = pd.DataFrame(np.load("utility/train_gfeats_v1.npy"), columns=featsg)
-    train_chat = pd.DataFrame(np.load("utility/train_gfeats_v3.npy"), columns=featsg2)
-    train_chat3 = pd.DataFrame(np.load("utility/train_gfeats_v2.npy"), columns=featsg3)
-    train_chat5 = pd.DataFrame(np.load("train_gfeats_v8.npy"), columns=featsg6)
+    train_contact = pd.DataFrame(np.load(str(Path(UTILITY) / "train_gfeats_v1.npy")), columns=featsg)
+    train_chat = pd.DataFrame(np.load(str(Path(UTILITY) / "train_gfeats_v03.npy")), columns=featsg2)
+    train_chat3 = pd.DataFrame(np.load(str(Path(UTILITY) / "train_gfeats_v2.npy")), columns=featsg3)
+    train_chat5 = pd.DataFrame(np.load(str(Path(UTILITY) / "train_gfeats_v8.npy")), columns=featsg6)
 
-    train_swap = pd.DataFrame(np.load("train_swap.npy"), columns=["swap_feat"])
+    train_swap = pd.DataFrame(np.load(str(Path(UTILITY) / "train_swap.npy")), columns=["swap_feat"])
 
     tr_all = pd.concat([train, train_contact[["uv", "nv", "cn", "jc", "aa", "ra"]],
                     train_chat[["uv_2", "nv_2", "cn_2"]], train_chat3[["uv_3", "nv_3", "cn_3"]], train_chat5, train_swap], axis=1)
@@ -46,12 +44,12 @@ if __name__=="__main__":
 
     tr_all = scaler.fit_transform(tr_all[feats])
 
-    np.save("train_graph_feats.npy", tr_all)
+    np.save(str(Path(UTILITY) / "train_graph_feats.npy"), tr_all)
 
-    test_contact = pd.DataFrame(np.load("utility/test_gfeats_v1.npy"), columns=featsg)
-    test_chat = pd.DataFrame(np.load("utility/test_gfeats_v3.npy"), columns=featsg2)
-    test_chat3 = pd.DataFrame(np.load("utility/test_gfeats_v2.npy"), columns=featsg3)
-    test_chat5 = pd.DataFrame(np.load("test_gfeats_v8.npy"), columns=featsg6)
+    test_contact = pd.DataFrame(np.load(str(Path(UTILITY) / "test_gfeats_v1.npy")), columns=featsg)
+    test_chat = pd.DataFrame(np.load(str(Path(UTILITY) / "test_gfeats_v03.npy")), columns=featsg2)
+    test_chat3 = pd.DataFrame(np.load(str(Path(UTILITY) / "test_gfeats_v2.npy")), columns=featsg3)
+    test_chat5 = pd.DataFrame(np.load(str(Path(UTILITY) / "test_gfeats_v8.npy")), columns=featsg6)
 
     test_swap = pd.DataFrame(np.load("test_swap.npy"), columns=["swap_feat"])
 
@@ -60,4 +58,4 @@ if __name__=="__main__":
 
     te_all = scaler.transform(te_all[feats])
 
-    np.save("test_graph_feats.npy", te_all)
+    np.save(str(Path(UTILITY) / "test_graph_feats.npy"), te_all)

@@ -14,13 +14,14 @@ import networkx as nx
 from tqdm import tqdm
 
 from utils import read_data
+from configs import UTILITY
 
 
 if __name__=="__main__":
     train, test, users = read_data("data")
     tr_all = train[["node1_id", "node2_id"]].values
-    np.save("train_nodes.npy", tr_all)
+    np.save(str(Path(UTILITY) / "train_nodes.npy"), tr_all)
 
     te_all = test[["node1_id", "node2_id"]].values
-    np.save("test_nodes.npy", te_all)
+    np.save(str(Path(UTILITY) / "test_nodes.npy"), te_all)
 
