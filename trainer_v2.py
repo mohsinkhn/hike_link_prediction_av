@@ -26,8 +26,8 @@ def merge_graph_feats(df, flag="train"):
     df_contact = pd.DataFrame(np.load(UTILITY + "/{}_gfeats_v1.npy".format(flag)), columns=featsg)
     df_chat = pd.DataFrame(np.load(UTILITY + "/{}_gfeats_v2.npy".format(flag)), columns=featsg2)
     df_chat3 = pd.DataFrame(np.load(UTILITY + "/{}_gfeats_v3.npy".format(flag)), columns=featsg3)
-    df_chat4 = pd.DataFrame(np.load(UTILITY+"/{}_gfeats_v4.npy".format(flag)), columns=featsg4)
-    df_swap = pd.DataFrame(np.load("{}_swap.npy".format(flag)), columns=["swap_feat"])
+    df_chat4 = pd.DataFrame(np.load(UTILITY + "/{}_gfeats_v4.npy".format(flag)), columns=featsg4)
+    df_swap = pd.DataFrame(np.load(UTILITY + "/{}_swap.npy".format(flag)), columns=["swap_feat"])
     df_all = pd.concat([df, df_contact, df_chat, df_chat3, df_chat4, df_swap], axis=1)
     df_all["f12_xy"] = df_all["f12_x"]/df_all["f12_y"]
     return df_all
@@ -79,10 +79,10 @@ if __name__ == "__main__":
         print("Score for fold {} is {}".format(i, roc_auc_score(y_val, val_preds)))
     #break
     print("Overall Score for oof predictions ", roc_auc_score(y, y_preds_lgb))
-    np.save(str(Path(UTILITY) / "y_preds_oof.npy"), y_preds_lgb)
+    np.save(str(Path(UTILITY) / "train_oof_preds.npy"), y_preds_lgb)
     from scipy.stats import gmean
     y_test_preds = gmean(test_preds_allfolds, axis=0)
-    np.save(str(Path(UTILITY) / "y_test_preds.npy"), y_test_preds)
+    np.save(str(Path(UTILITY) / "test_oof_preds.npy"), y_test_preds)
     model = lgb.LGBMClassifier(boosting_type='gbdt', n_estimators=10000, learning_rate=0.1, num_leaves=8,
                            subsample=0.9, colsample_bytree=0.9, seed=1, min_child_samples=60, n_jobs=-1,
                           reg_alpha=0.1, reg_lambda=1, min_child_weight=1)    

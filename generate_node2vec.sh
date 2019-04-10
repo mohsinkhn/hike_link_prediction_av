@@ -1,3 +1,4 @@
+python prepare_data_node2vec.py
 git clone https://github.com/snap-stanford/snap.git
 cd snap
 make all
