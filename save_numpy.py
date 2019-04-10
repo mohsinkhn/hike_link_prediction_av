@@ -32,10 +32,10 @@ if __name__=="__main__":
     featsg6 = ["upath", "vpath"]
     train_contact = pd.DataFrame(np.load("utility/train_gfeats_v1.npy"), columns=featsg)
     train_chat = pd.DataFrame(np.load("utility/train_gfeats_v3.npy"), columns=featsg2)
-    train_chat3 = pd.DataFrame(np.load("Link_prediction_hikeml_av/train_graph_feats5.npy"), columns=featsg3)
-    train_chat5 = pd.DataFrame(np.load("Link_prediction_hikeml_av/train_gfeats_v8.npy"), columns=featsg6)
+    train_chat3 = pd.DataFrame(np.load("utility/train_gfeats_v2.npy"), columns=featsg3)
+    train_chat5 = pd.DataFrame(np.load("train_gfeats_v8.npy"), columns=featsg6)
 
-    train_swap = pd.DataFrame(np.load("Link_prediction_hikeml_av/train_swap.npy"), columns=["swap_feat"])
+    train_swap = pd.DataFrame(np.load("train_swap.npy"), columns=["swap_feat"])
 
     tr_all = pd.concat([train, train_contact[["uv", "nv", "cn", "jc", "aa", "ra"]],
                     train_chat[["uv_2", "nv_2", "cn_2"]], train_chat3[["uv_3", "nv_3", "cn_3"]], train_chat5, train_swap], axis=1)
@@ -50,10 +50,10 @@ if __name__=="__main__":
 
     test_contact = pd.DataFrame(np.load("utility/test_gfeats_v1.npy"), columns=featsg)
     test_chat = pd.DataFrame(np.load("utility/test_gfeats_v3.npy"), columns=featsg2)
-    test_chat3 = pd.DataFrame(np.load("Link_prediction_hikeml_av/test_graph_feats5.npy"), columns=featsg3)
-    test_chat5 = pd.DataFrame(np.load("Link_prediction_hikeml_av/test_gfeats_v8.npy"), columns=featsg6)
+    test_chat3 = pd.DataFrame(np.load("utility/test_gfeats_v2.npy"), columns=featsg3)
+    test_chat5 = pd.DataFrame(np.load("test_gfeats_v8.npy"), columns=featsg6)
 
-    test_swap = pd.DataFrame(np.load("Link_prediction_hikeml_av/test_swap.npy"), columns=["swap_feat"])
+    test_swap = pd.DataFrame(np.load("test_swap.npy"), columns=["swap_feat"])
 
     te_all = pd.concat([test, test_contact[["uv", "nv", "cn", "jc", "aa", "ra"]],
                     test_chat[["uv_2", "nv_2", "cn_2"]], test_chat3[["uv_3", "nv_3", "cn_3"]], test_chat5, test_swap], axis=1)
