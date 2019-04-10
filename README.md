@@ -30,5 +30,7 @@ Codes for link prediction competition hosted my Hike on Analytics Vidhya
 * run `bash generate_features.py`
 * run `python trainer_v2.py`
 * run `python trainer_v3.py`
+* run `bash generate_numpy.sh`
+* run `bash generate_node2vec.sh`
 * run `python NNv1.py`
 * run `python stacker.py`
