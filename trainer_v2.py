@@ -89,6 +89,6 @@ if __name__ == "__main__":
     y_test_preds = model.fit(X, y).predict_proba(X_test)[:, 1]
     sub = test[['id']]
     sub["is_chat"] = y_test_preds
-    sub.to_csv(str(Path(SUBMISSIONS) / "sub_v6.csv", index=False))
+    sub.to_csv(str(Path(SUBMISSIONS) / "sub_v6.csv"), index=False)
                        
                             
